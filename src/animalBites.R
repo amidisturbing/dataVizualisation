@@ -96,15 +96,37 @@ AnimalDataPitBull$bite_date = format(as.Date(AnimalDataPitBull$bite_date, format
 ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = bite_date)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Pit Bull Bites per Day")+guides(fill=FALSE)
 
 #cat bites per gender
-AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
-AnimalDataCat$GenderIDDesc[which(is.na(AnimalDataCat$GenderIDDesc))]<-"UNKNOWN"
-ggplot(data=AnimalDataCat, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Cat Bites per Gender")+guides(fill=FALSE)
+#AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+#AnimalDataCat$GenderIDDesc[which(is.na(AnimalDataCat$GenderIDDesc))]<-"UNKNOWN"
+#ggplot(data=AnimalDataCat, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Cat Bites per Gender")+guides(fill=FALSE)
+
+#cat bites per gender as Waffle chart
+var <- AnimalDataCat$GenderIDDesc  # the categorical data 
+nrows <- 10
+df <- expand.grid(y = 1:nrows, x = 1:nrows)
+categ_table <- round(table(var) * ((nrows*nrows)/(length(var))))
+df$category <- factor(rep(names(categ_table), categ_table))  
+## Plot
+ggplot(df, aes(x = x, y = y, fill = category)) + 
+  geom_tile(color = "black", size = 0.5) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0), trans = 'reverse') +
+  scale_fill_brewer(palette = "Set3") +
+  labs(title="Cat Bites", subtitle="per Gender",
+       caption="Number of Bites vs Gender") + 
+  theme(#panel.border = element_rect(size = 2),
+        plot.title = element_text(size = rel(1.2)),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "right")
 
 #cat bites per year
 AnimalDataCatYear<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
 AnimalDataCatYear<-AnimalDataCatYear[!is.na(AnimalDataCatYear$bite_date),]
 AnimalDataCatYear$bite_date = format(as.Date(AnimalDataCatYear$bite_date, format="%Y-%m-%d"),"%Y")
-ggplot(AnimalDataCatYear, aes(x=bite_date, fill = bite_date)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Cat Bites per Year")
+ggplot(AnimalDataCatYear, aes(x=bite_date, fill = bite_date)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Cat Bites per Year")+guides(fill=FALSE)
 
 #cat bites per month
 CatDataOnlyMonth<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
