@@ -1,0 +1,146 @@
+---
+title: "Data Visualization Project 1"
+author: 
+- name: Alexander Jaenisch, Rafaela Neff, Parvin Shakibaei
+  affiliation: Beuth University of Applied Science Berlin
+date: "Summer Term 2018"
+output: 
+  html_document: 
+    fig_caption: yes
+    highlight: tango
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+library(knitr) #to set up options and use kable function
+opts_chunk$set(echo = FALSE, cache=FALSE) #(echo = TRUE) would include all code
+read_chunk('src/script.R')
+```
+
+```{r part1}
+```
+# Introduction
+
+In this excersise we examine color measurements of Douglas color card prints. The intended colors for color card production were compared to thirteen large sheets, sampled from production. Each sample sheet contains 42 color cards also refered to as target.
+
+The colors are represented in Lab color space.
+
+The repository can be found on [Github](https://github.com/amidisturbing/datavis2018).
+
+## Lab color space
+
+Colors are mathematically described with three components in the Lab* color space:
+
+- **L**: luminance
+- **a**: color from green to magenta 
+- **b**: color from blue to yellow
+
+The difference between two colors can be described by the Δ E formular, which will be covered in the following section.
+
+## Defining and interpreting Δ E
+
+ΔE - (Delta E, dE) is the euclidean distance between their colorimetric coordinates.
+It is a metric that encodes a numeric understanding how the human eye perceives color difference.
+The word Delta defines a difference between two spots while E comes from the German Word *"Empfindung"*.
+
+In this Analysis the E76 vaue was calculated which got his name from the year it was founded, which was 1976. 
+
+The formular is
+
+$$∆E76 = \sqrt{∆L^2 + ∆a^2 + ∆b^2}$$
+
+where:
+
+∆L = L1 − L2 - difference of luminance
+
+∆a = a1 − a2 - difference of values for coordinate a
+
+∆b = b1 − b2 - difference of values for coordinate b
+
+```{r}
+perceptionTable <- matrix(NA, nrow = 5, ncol = 2, byrow = FALSE)
+colnames(perceptionTable) <- c("ΔE value","Perception")
+deltaE <- c("<= 1.0","1 - 2", "3 - 10", "11 - 49", "100")
+perception <- c("Not perceptible by human eyes.", "Perceptible through close observation.
+", "Perceptible at a glance.
+", "Colors are more similar than opposite
+", "Colors are exact opposite
+")
+for (i in 1:5) {
+  perceptionTable[i,"ΔE value"] <- deltaE[i]
+  perceptionTable[i,"Perception"] <- perception[i]
+}
+kable(perceptionTable, caption = "On a typical scale, the Delta E value will range from 0 to 100.")
+```
+
+
+# Analysis
+
+To analyse the given data the euclidean distances are computed for each spot, each target as well as each sample. The visibility for the human eye can be concluded from the ranges given in the perception table.
+
+## Assignment of color spots to levels of perception
+
+The following histogram contains the target-count (color cards) and their perception level compared to te master.
+
+
+```{r fig.cap="Distribution of the ∆E values in the 5 visibility levels. The histogram shows that most of the color spots belong to the third perception level, which means that a human will notice it at glance. The printers are not accurate enough so the settings have to be adjusted or the target specific offset has to be taken care of by the Douglas app.", barplotVisLevel}
+```
+
+
+## Is the behavior differential between targets?
+
+One target is a single color card on one sample sheet. One sample can be seen as a big sheet containing 42 color cards.
+
+The histogram shows the distribution of the targets regarding their  ΔE value to the Master Color Card.
+
+```{r fig.cap="The mean ΔE value per target shows that the most target sheets show an error that is only perceptible at glance. The behavior inbetween the targets is very similar, hence non of the targets fits into the first and the second perception group. All of them can be found in group three and four, which means that there is not one single color card without visible differences in comparison to the master.", histMeanErrorPerTarget}
+```
+
+The density plot shows that the ΔE values for the color cards fit into a normal distribution.
+
+```{r fig.cap="The density of ΔE value shows the highest error between 3.5 and 4. It is compared to the master data and perceptible at glance.", densityMeanErrorPerTarget}
+```
+
+## Is the behavior differential between samples?
+
+The mean error of one sample relativ to the print master falls almost in the same range as the mean Error per target, but is 0.3 higher at its smallest value. This is not perceptible for the human eye.
+
+```{r fig.cap="If we take all thirteen samples into account we can see that the mean ΔE values between the samples is quite low. This supports our hypothesis that the quality of the printers is almost equal.", histMeanErrorPerSample}
+```
+
+
+## Visualization of colors grouped by perception levels
+
+The following plots show the individual colors that have been printed grouped by their perception levels. As input data all color spots are taken into account. This gives an overview which colorsettings were more precise than others. 
+
+The results are visualized in rgb color space.
+
+```{r fig.cap="", rgbForVisLevelOne}
+```
+
+```{r fig.cap="", rgbForVisLevelTwo}
+```
+
+The amount of colors in level 1 and level 2 is too small to conclude something since it also contains opposite colors.
+
+```{r fig.cap="For level 3 it can be concluded that almost al colors fit in this perception level. This means that probably the settings for all colors have to be tuned to fit the master.", rgbForVisLevelThree}
+```
+
+```{r fig.cap="For level 4 with the biggest visible difference there are only three colors with a huge distance to the corresponding master color spot. The colors are skintone, brown and violett.", rgbForVisLevelFour}
+```
+
+## Verification of the previous result
+
+To confirm the visualization of colors grouped by perception levels plotted in the previouse section, a sample was taken and vizualised in rgb color space.
+
+The following picture shows the color with the least perceptible color-difference and the one with the most perceptible one. 
+
+```{r fig.cap="The comparisson between the intended color taken from the Master Color Card and the color spot with the highest Error is shown below. The visualized colors are the same as in the 3D plots, which supports the conclusions.", compareWorseBestDelta}
+```
+
+The color with the smallest ΔE value and the one with biggest seem to appears always at the same color spot on all color cards.That means that the Error seems to be very much related to the intended color.
+The conclusion is that in the case of the worst and the best print result the master was never intended to be used as a template.
+
