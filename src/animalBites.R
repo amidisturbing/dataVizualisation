@@ -59,15 +59,23 @@ AnimalDataUnknown$BreedIDDesc <-factor(AnimalDataUnknown$BreedIDDesc, levels = u
 ggplot(data = subset(AnimalDataUnknown,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed with Unknown gender")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataUnknown$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
 #create copy of orig data
-AnimalDataDateCleaned<-AnimalData
+AnimalDataOnlyYear<-AnimalData
 #remove rows with NA
-AnimalDataDateCleaned<-AnimalDataDateCleaned[!is.na(AnimalData$bite_date),]
+AnimalDataOnlyYear<-AnimalDataOnlyYear[!is.na(AnimalData$bite_date),]
 
 library(scales)
 #extract year
-AnimalDataDateCleaned$bite_date = format(as.Date(AnimalDataDateCleaned$bite_date, format="%Y-%m-%d"),"%Y")
+AnimalDataOnlyYear$bite_date = format(as.Date(AnimalDataOnlyYear$bite_date, format="%Y-%m-%d"),"%Y")
 #transform back to date format
-AnimalDataDateCleaned$bite_date = as.Date(AnimalDataDateCleaned$bite_date, format('%Y'))
+AnimalDataOnlyYear$bite_date = as.Date(AnimalDataOnlyYear$bite_date, format('%Y'))
 #plot year vs bites #TODO colours not working here somehow
-ggplot(AnimalDataDateCleaned, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat="count") +scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))+guides(fill=FALSE)
+ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat="count") +scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))+guides(fill=FALSE)
 
+
+AnimalDataOnlyMonth<-AnimalData
+AnimalDataOnlyMonth<-AnimalDataOnlyMonth[!is.na(AnimalData$bite_date),]
+AnimalDataOnlyMonth$bite_date = format(as.Date(AnimalDataOnlyMonth$bite_date, format="%Y-%m-%d"),"%m")
+AnimalDataOnlyMonth$bite_date
+AnimalDataOnlyMonth$bite_date = as.Date(AnimalDataOnlyMonth$bite_date, format('%m'))
+AnimalDataOnlyMonth
+ggplot(AnimalDataOnlyMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
