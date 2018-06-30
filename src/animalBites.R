@@ -8,10 +8,17 @@ AnimalData <- read.csv("data/Health_AnimalBites.csv")
 #First we will take a look at our data
 dim(AnimalData)
 names(AnimalData)
-
 #data cleaning, convert missing values to NA
 AnimalData[AnimalData == ""] <- NA
 apply(is.na(AnimalData), 2, sum)
+#clean wrong dates
+library(anytime)
+#AnimalData<-AnimalData[anytime(AnimalData$bite_date) <= "1985-05-05" | anytime(AnimalData$bite_date) >= "2018-06-21",]
+AnimalData<-AnimalData[anytime(AnimalData$bite_date) >= anytime(as.factor("1985-05-05 00:00:00")) & anytime(AnimalData$bite_date) <= anytime(as.factor("2018-06-21 00:00:00")),]
+
+
+
+
 
 #almost all coulums have missing values
 #the most complete columns are: bite_date, SpeciesIDDesc
@@ -28,7 +35,8 @@ ggplot(data = subset(AnimalData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], 
 
 AnimalData$BreedIDDesc <-factor(AnimalData$BreedIDDesc, levels = unique(as.character(AnimalData$BreedIDDesc)))
 ggplot(data = subset(AnimalData,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Species") + ylab("Bites")+ggtitle("Animalbites per Species")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalData$BreedIDDesc), decreaZsing = TRUE)))+ guides(fill=FALSE)
-
+#30 most common TODO fix count numbers
+ggplot(data = subset(AnimalData,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Species") + ylab("Bites")+ggtitle("Animalbites per Species")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalData$BreedIDDesc), decreaZsing = TRUE)[1:30]))+ guides(fill=FALSE)
 
 
        
