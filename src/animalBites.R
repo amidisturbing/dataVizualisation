@@ -25,7 +25,7 @@ library(ggplot2)
 #animal bites per Species
 AnimalData$SpeciesIDDesc <-
   factor(AnimalData$SpeciesIDDesc, levels = unique(as.character(AnimalData$SpeciesIDDesc)))
-ggplot(data = subset(AnimalData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], fill = SpeciesIDDesc))+ geom_bar(stat = "count")+ xlab("Species") + ylab("Bites")+ ggtitle("Animalbites per Species")+ xlim(names(sort(table(AnimalData$SpeciesIDDesc), decreaZsing = TRUE)[1:5]))
+ggplot(data = subset(AnimalData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], fill = SpeciesIDDesc))+ geom_bar(stat = "count")+ xlab("Species") + ylab("Bites")+ ggtitle("Animalbites per Species")+ xlim(names(sort(table(AnimalData$SpeciesIDDesc), decreasing = TRUE)[1:5]))
 
 #dog bites per breed
 
@@ -124,3 +124,12 @@ CatDataOnlyDay<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
 CatDataOnlyDay<-CatDataOnlyDay[!is.na(CatDataOnlyDay$bite_date),]
 CatDataOnlyDay$bite_date = format(as.Date(CatDataOnlyDay$bite_date, format="%Y-%m-%d"),"%d")
 ggplot(CatDataOnlyDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
+
+#other species excluding dogs & cats
+otherAnimalsData<-AnimalData[AnimalData$SpeciesIDDesc != "DOG" & AnimalData$SpeciesIDDesc != "CAT",]
+otherAnimalsData$SpeciesIDDesc <-
+  factor(otherAnimalsData$SpeciesIDDesc, levels = unique(as.character(otherAnimalsData$SpeciesIDDesc)))
+ggplot(data = subset(otherAnimalsData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], fill = SpeciesIDDesc))+ geom_bar(stat = "count")+ xlab("Species") + ylab("Bites")+ ggtitle("Animalbites per Species")+ xlim(names(sort(table(otherAnimalsData$SpeciesIDDesc), decreasing = TRUE)))
+
+
+
