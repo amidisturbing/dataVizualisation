@@ -27,6 +27,23 @@ AnimalData$SpeciesIDDesc <-
   factor(AnimalData$SpeciesIDDesc, levels = unique(as.character(AnimalData$SpeciesIDDesc)))
 ggplot(data = subset(AnimalData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], fill = SpeciesIDDesc))+ geom_bar(stat = "count")+ xlab("Species") + ylab("Bites")+ ggtitle("Animalbites per Species")+ xlim(names(sort(table(AnimalData$SpeciesIDDesc), decreasing = TRUE)[1:5]))
 
+
+#pie chart for bites
+theme_set(theme_classic())
+df <- as.data.frame(table(AnimalData$SpeciesIDDesc))
+colnames(df) <- c("class", "freq")
+pie <- ggplot(df, aes(x = "", y=freq, fill = factor(class))) + 
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank(), 
+        plot.title = element_text(hjust=0.5)) + 
+  labs(fill="class", 
+       x=NULL, 
+       y=NULL, 
+       title="Bites per Species", 
+       caption="")
+
+pie + coord_polar(theta = "y", start=0)
+
 #dog bites per breed
 
 AnimalData$BreedIDDesc <-factor(AnimalData$BreedIDDesc, levels = unique(as.character(AnimalData$BreedIDDesc)))
@@ -35,9 +52,15 @@ ggplot(data = subset(AnimalData,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill
 AnimalData$BreedIDDesc <-factor(AnimalData$BreedIDDesc, levels = unique(as.character(AnimalData$BreedIDDesc)))
 ggplot(data = subset(AnimalData,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalData$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
+
+
 #gender of dogs involved in bites
 AnimalData$GenderIDDesc[which(is.na(AnimalData$GenderIDDesc))]<-"UNKNOWN"
 ggplot(data=AnimalData, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Bites per Gender")+ guides(fill=FALSE)
+
+
+# Barplot
+ggplot(AnimalData, aes(x="", y=GenderIDDesc[], fill=GenderIDDesc))+geom_bar(width = 1, stat = "identity")+theme(axis.title=element_blank(),axis.text=element_blank(),axis.ticks.x=element_blank(),legend.title = element_blank())
 
 
 #breed of male dogs involved in bites
@@ -146,7 +169,6 @@ otherAnimalsData$SpeciesIDDesc <-
   factor(otherAnimalsData$SpeciesIDDesc, levels = unique(as.character(otherAnimalsData$SpeciesIDDesc)))
 ggplot(data = subset(otherAnimalsData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], fill = SpeciesIDDesc))+ geom_bar(stat = "count")+ xlab("Other Secies") + ylab("Number of Bites")+ ggtitle("Animalbites per  other Species")+ xlim(names(sort(table(otherAnimalsData$SpeciesIDDesc), decreasing = TRUE)))
 
-
 #other animal bites per year
 otherAnimalsDataYear<-AnimalData[AnimalData$SpeciesIDDesc != "DOG" & AnimalData$SpeciesIDDesc != "CAT",]
 otherAnimalsDataYear<-otherAnimalsDataYear[!is.na(otherAnimalsDataYear$bite_date),]
@@ -158,7 +180,8 @@ ggplot(otherAnimalsDataYear, aes(x=bite_date, fill = bite_date)) + geom_bar(stat
 otherAnimalsDataMonth<-AnimalData[AnimalData$SpeciesIDDesc != "DOG" & AnimalData$SpeciesIDDesc != "CAT",]
 otherAnimalsDataMonth<-otherAnimalsDataMonth[!is.na(otherAnimalsDataMonth$bite_date),]
 otherAnimalsDataMonth$bite_date = format(as.Date(otherAnimalsDataMonth$bite_date, format="%Y-%m-%d"),"%m")
-ggplot(otherAnimalsDataMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)+xlab("Month of the Year")+ylab("Number of Bites")+ggtitle("Other Animal Bites per Month")
+ggplot(otherAnimalsDataMonth, aes(x=bite_date,fill = otherAnimalsDataMonth$SpeciesIDDesc)) + geom_bar(stat="count")+xlab("Month of the Year")+ylab("Number of Bites")+ggtitle("Other Animal Bites per Month")
+
 
 #other bites per day
 otherAnimalsDataDay<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
