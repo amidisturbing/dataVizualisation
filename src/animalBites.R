@@ -71,14 +71,27 @@ AnimalDataOnlyYear$bite_date = as.Date(AnimalDataOnlyYear$bite_date, format('%Y'
 #plot year vs bites #TODO colours not working here somehow
 ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat="count") +scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))+guides(fill=FALSE)
 
-
+#dog bites per month
 AnimalDataOnlyMonth<-AnimalData
 AnimalDataOnlyMonth<-AnimalDataOnlyMonth[!is.na(AnimalData$bite_date),]
 AnimalDataOnlyMonth$bite_date = format(as.Date(AnimalDataOnlyMonth$bite_date, format="%Y-%m-%d"),"%m")
 ggplot(AnimalDataOnlyMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
 
-
+#dog bites per day
 AnimalDataOnlyDay<-AnimalData
 AnimalDataOnlyDay<-AnimalDataOnlyDay[!is.na(AnimalData$bite_date),]
 AnimalDataOnlyDay$bite_date = format(as.Date(AnimalDataOnlyDay$bite_date, format="%Y-%m-%d"),"%d")
 ggplot(AnimalDataOnlyDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
+
+#dog bites in the body per breed in the head
+AnimalDataHead<-AnimalData[AnimalData$WhereBittenIDDesc=="HEAD",]
+AnimalDataHead$BreedIDDesc <-factor(AnimalDataHead$BreedIDDesc, levels = unique(as.character(AnimalDataHead$BreedIDDesc)))
+ggplot(data = subset(AnimalDataHead,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed in the Head")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataHead$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
+
+
+#dog bites in the head by breed in the body
+AnimalDataBody<-AnimalData[AnimalData$WhereBittenIDDesc=="BODY",]
+AnimalDataBody$BreedIDDesc <-factor(AnimalDataBody$BreedIDDesc, levels = unique(as.character(AnimalDataBody$BreedIDDesc)))
+ggplot(data = subset(AnimalDataBody,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed in the Body")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataBody$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
+
+
