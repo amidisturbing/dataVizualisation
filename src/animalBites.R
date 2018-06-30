@@ -75,7 +75,10 @@ ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat=
 AnimalDataOnlyMonth<-AnimalData
 AnimalDataOnlyMonth<-AnimalDataOnlyMonth[!is.na(AnimalData$bite_date),]
 AnimalDataOnlyMonth$bite_date = format(as.Date(AnimalDataOnlyMonth$bite_date, format="%Y-%m-%d"),"%m")
-AnimalDataOnlyMonth$bite_date
-AnimalDataOnlyMonth$bite_date = as.Date(AnimalDataOnlyMonth$bite_date, format('%m'))
-AnimalDataOnlyMonth
 ggplot(AnimalDataOnlyMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
+
+
+AnimalDataOnlyDay<-AnimalData
+AnimalDataOnlyDay<-AnimalDataOnlyDay[!is.na(AnimalData$bite_date),]
+AnimalDataOnlyDay$bite_date = format(as.Date(AnimalDataOnlyDay$bite_date, format="%Y-%m-%d"),"%d")
+ggplot(AnimalDataOnlyDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
