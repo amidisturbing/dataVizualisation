@@ -132,4 +132,23 @@ otherAnimalsData$SpeciesIDDesc <-
 ggplot(data = subset(otherAnimalsData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDesc[], fill = SpeciesIDDesc))+ geom_bar(stat = "count")+ xlab("Species") + ylab("Bites")+ ggtitle("Animalbites per Species")+ xlim(names(sort(table(otherAnimalsData$SpeciesIDDesc), decreasing = TRUE)))
 
 
+#other animal bites per year
+otherAnimalsData<-otherAnimalsData[!is.na(otherAnimalsData$bite_date),]
+otherAnimalsData$bite_date = format(as.Date(otherAnimalsData$bite_date, format="%Y-%m-%d"),"%Y")
+otherAnimalsData$bite_date = as.Date(otherAnimalsData$bite_date, format('%Y'))
+ggplot(otherAnimalsData, aes(x=bite_date[])) + geom_bar(stat="count")+scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))
+
+
+#other animal bites per month
+otherAnimalsDataMonth<-AnimalData[AnimalData$SpeciesIDDesc != "DOG" & AnimalData$SpeciesIDDesc != "CAT",]
+otherAnimalsDataMonth<-otherAnimalsDataMonth[!is.na(otherAnimalsDataMonth$bite_date),]
+otherAnimalsDataMonth$bite_date = format(as.Date(otherAnimalsDataMonth$bite_date, format="%Y-%m-%d"),"%m")
+ggplot(otherAnimalsDataMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
+
+#other bites per day
+otherAnimalsDataDay<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+otherAnimalsDataDay<-otherAnimalsDataDay[!is.na(otherAnimalsDataDay$bite_date),]
+otherAnimalsDataDay$bite_date = format(as.Date(otherAnimalsDataDay$bite_date, format="%Y-%m-%d"),"%d")
+ggplot(otherAnimalsDataDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
+
 
