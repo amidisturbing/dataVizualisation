@@ -13,11 +13,7 @@ AnimalData[AnimalData == ""] <- NA
 apply(is.na(AnimalData), 2, sum)
 #clean wrong dates
 library(anytime)
-#AnimalData<-AnimalData[anytime(AnimalData$bite_date) <= "1985-05-05" | anytime(AnimalData$bite_date) >= "2018-06-21",]
 AnimalData<-AnimalData[anytime(AnimalData$bite_date) >= anytime(as.factor("1985-05-05 00:00:00")) & anytime(AnimalData$bite_date) <= anytime(as.factor("2018-06-21 00:00:00")),]
-
-
-
 
 
 #almost all coulums have missing values
@@ -43,4 +39,16 @@ ggplot(data = subset(AnimalData,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill
 AnimalData$GenderIDDesc[which(is.na(AnimalData$GenderIDDesc))]<-"UNKNOWN"
 ggplot(data=AnimalData, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Bites per Gender")+ guides(fill=FALSE)
 
+
+#breed of male dogs involved in bites
+#30 most common
+AnimalDataMale<-AnimalData[AnimalData$GenderIDDesc=="MALE",]
+AnimalDataMale$BreedIDDesc <-factor(AnimalDataMale$BreedIDDesc, levels = unique(as.character(AnimalDataMale$BreedIDDesc)))
+ggplot(data = subset(AnimalDataMale,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Male Breed")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataMale$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
+
+#breed of female dogs involved in bites
+#30 most common
+AnimalDataFemale<-AnimalData[AnimalData$GenderIDDesc=="FEMALE",]
+AnimalDataFemale$BreedIDDesc <-factor(AnimalDataFemale$BreedIDDesc, levels = unique(as.character(AnimalDataFemale$BreedIDDesc)))
+ggplot(data = subset(AnimalDataFemale,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Male Breed")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataFemale$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
