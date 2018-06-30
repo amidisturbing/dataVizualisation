@@ -87,19 +87,19 @@ AnimalDataOnlyYear<-AnimalData
 AnimalDataOnlyYear<-AnimalDataOnlyYear[!is.na(AnimalDataOnlyYear$bite_date),]
 #extract year
 AnimalDataOnlyYear$bite_date = format(as.Date(AnimalDataOnlyYear$bite_date, format="%Y-%m-%d"),"%Y")
-ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)+xlab("Year")+ylab("Number of Bites")+ggtitle("Dog Bites per Year")
+ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =AnimalDataOnlyYear$GenderIDDesc)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Dog Bites per Year")
 
 #dog bites per month
 AnimalDataOnlyMonth<-AnimalData
 AnimalDataOnlyMonth<-AnimalDataOnlyMonth[!is.na(AnimalDataOnlyMonth$bite_date),]
 AnimalDataOnlyMonth$bite_date = format(as.Date(AnimalDataOnlyMonth$bite_date, format="%Y-%m-%d"),"%m")
-ggplot(AnimalDataOnlyMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)+xlab("Month of the Year")+ylab("Number of Bites")+ggtitle("Dog Bites per Month")
+ggplot(AnimalDataOnlyMonth, aes(x=bite_date,fill = AnimalDataOnlyMonth$GenderIDDesc)) + geom_bar(stat="count")+xlab("Month of the Year")+ylab("Number of Bites")+ggtitle("Dog Bites per Month")
 
 #dog bites per day
 AnimalDataOnlyDay<-AnimalData
 AnimalDataOnlyDay<-AnimalDataOnlyDay[!is.na(AnimalDataOnlyDay$bite_date),]
 AnimalDataOnlyDay$bite_date = format(as.Date(AnimalDataOnlyDay$bite_date, format="%Y-%m-%d"),"%d")
-ggplot(AnimalDataOnlyDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Dog Bites per Day")
+ggplot(AnimalDataOnlyDay, aes(x=bite_date,fill = AnimalDataOnlyYear$GenderIDDesc)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Dog Bites per Day")
 
 #dog bites in the body per breed in the head
 AnimalDataHead<-AnimalData[AnimalData$WhereBittenIDDesc=="HEAD",]
@@ -114,9 +114,11 @@ ggplot(data = subset(AnimalDataBody,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], 
 
 #pitbull bites per year
 AnimalDataPitBull<-AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
+AnimalDataPitBull$WhereBittenIDDesc[which(is.na(AnimalDataPitBull$WhereBittenIDDesc))]<-"UNKNOWN"
 AnimalDataPitBull<-AnimalDataPitBull[!is.na(AnimalDataPitBull$bite_date),]
 AnimalDataPitBull$bite_date = format(as.Date(AnimalDataPitBull$bite_date, format="%Y-%m-%d"),"%Y")
-ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = bite_date)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Pit Bull Bites per Day")+guides(fill=FALSE)
+ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = AnimalDataPitBull$WhereBittenIDDesc)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Pit Bull Bites per Day")
+
 
 #cat bites per gender
 #AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
@@ -173,7 +175,7 @@ ggplot(data = subset(otherAnimalsData,!is.na(SpeciesIDDesc)),aes(x = SpeciesIDDe
 otherAnimalsDataYear<-AnimalData[AnimalData$SpeciesIDDesc != "DOG" & AnimalData$SpeciesIDDesc != "CAT",]
 otherAnimalsDataYear<-otherAnimalsDataYear[!is.na(otherAnimalsDataYear$bite_date),]
 otherAnimalsDataYear$bite_date = format(as.Date(otherAnimalsDataYear$bite_date, format="%Y-%m-%d"),"%Y")
-ggplot(otherAnimalsDataYear, aes(x=bite_date, fill = bite_date)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Other Animal Bites per Year")+guides(fill=FALSE)
+ggplot(otherAnimalsDataYear, aes(x=bite_date, fill = otherAnimalsDataYear$SpeciesIDDesc)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Other Animal Bites per Year")
 
 
 #other animal bites per month
@@ -184,9 +186,9 @@ ggplot(otherAnimalsDataMonth, aes(x=bite_date,fill = otherAnimalsDataMonth$Speci
 
 
 #other bites per day
-otherAnimalsDataDay<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+otherAnimalsDataDay<-AnimalData[AnimalData$SpeciesIDDesc != "DOG" & AnimalData$SpeciesIDDesc != "CAT",]
 otherAnimalsDataDay<-otherAnimalsDataDay[!is.na(otherAnimalsDataDay$bite_date),]
 otherAnimalsDataDay$bite_date = format(as.Date(otherAnimalsDataDay$bite_date, format="%Y-%m-%d"),"%d")
-ggplot(otherAnimalsDataDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Other Animal Bites per Day")
+ggplot(otherAnimalsDataDay, aes(x=bite_date,fill = otherAnimalsDataDay$SpeciesIDDesc)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Other Animal Bites per Day")
 
 
