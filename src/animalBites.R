@@ -73,13 +73,13 @@ ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat=
 
 #dog bites per month
 AnimalDataOnlyMonth<-AnimalData
-AnimalDataOnlyMonth<-AnimalDataOnlyMonth[!is.na(AnimalData$bite_date),]
+AnimalDataOnlyMonth<-AnimalDataOnlyMonth[!is.na(AnimalDataOnlyMonth$bite_date),]
 AnimalDataOnlyMonth$bite_date = format(as.Date(AnimalDataOnlyMonth$bite_date, format="%Y-%m-%d"),"%m")
 ggplot(AnimalDataOnlyMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
 
 #dog bites per day
 AnimalDataOnlyDay<-AnimalData
-AnimalDataOnlyDay<-AnimalDataOnlyDay[!is.na(AnimalData$bite_date),]
+AnimalDataOnlyDay<-AnimalDataOnlyDay[!is.na(AnimalDataOnlyDay$bite_date),]
 AnimalDataOnlyDay$bite_date = format(as.Date(AnimalDataOnlyDay$bite_date, format="%Y-%m-%d"),"%d")
 ggplot(AnimalDataOnlyDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
 
@@ -112,4 +112,15 @@ AnimalDataCat$bite_date = format(as.Date(AnimalDataCat$bite_date, format="%Y-%m-
 AnimalDataCat$bite_date = as.Date(AnimalDataCat$bite_date, format('%Y'))
 ggplot(AnimalDataCat, aes(x=bite_date[])) + geom_bar(stat="count")+scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))
 
+
 #cat bites per month
+CatDataOnlyMonth<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+CatDataOnlyMonth<-CatDataOnlyMonth[!is.na(CatDataOnlyMonth$bite_date),]
+CatDataOnlyMonth$bite_date = format(as.Date(CatDataOnlyMonth$bite_date, format="%Y-%m-%d"),"%m")
+ggplot(CatDataOnlyMonth, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
+
+#cat bites per day
+CatDataOnlyDay<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+CatDataOnlyDay<-CatDataOnlyDay[!is.na(CatDataOnlyDay$bite_date),]
+CatDataOnlyDay$bite_date = format(as.Date(CatDataOnlyDay$bite_date, format="%Y-%m-%d"),"%d")
+ggplot(CatDataOnlyDay, aes(x=bite_date,fill = bite_date)) + geom_bar(stat="count")+guides(fill=FALSE)
