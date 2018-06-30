@@ -50,5 +50,12 @@ ggplot(data = subset(AnimalDataMale,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], 
 #30 most common
 AnimalDataFemale<-AnimalData[AnimalData$GenderIDDesc=="FEMALE",]
 AnimalDataFemale$BreedIDDesc <-factor(AnimalDataFemale$BreedIDDesc, levels = unique(as.character(AnimalDataFemale$BreedIDDesc)))
-ggplot(data = subset(AnimalDataFemale,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Male Breed")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataFemale$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
+ggplot(data = subset(AnimalDataFemale,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Female Breed")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataFemale$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
+
+#breed of unknown dogs involved in bites
+#30 most common
+AnimalDataUnknown<-AnimalData[AnimalData$GenderIDDesc=="UNKNOWN",]
+AnimalDataUnknown$BreedIDDesc <-factor(AnimalDataUnknown$BreedIDDesc, levels = unique(as.character(AnimalDataUnknown$BreedIDDesc)))
+ggplot(data = subset(AnimalDataUnknown,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed with Unknown gender")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataUnknown$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
+
 
