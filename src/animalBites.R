@@ -95,10 +95,21 @@ AnimalDataBody$BreedIDDesc <-factor(AnimalDataBody$BreedIDDesc, levels = unique(
 ggplot(data = subset(AnimalDataBody,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed in the Body")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataBody$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
 #pitbull bites per year
-AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
 AnimalDataPitBull<-AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
 AnimalDataPitBull<-AnimalDataPitBull[!is.na(AnimalDataPitBull$bite_date),]
 AnimalDataPitBull$bite_date = format(as.Date(AnimalDataPitBull$bite_date, format="%Y-%m-%d"),"%Y")
 AnimalDataPitBull$bite_date = as.Date(AnimalDataPitBull$bite_date, format('%Y'))
 ggplot(AnimalDataPitBull, aes(x=bite_date[])) + geom_bar(stat="count")+scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))
 
+#cat bites per gender
+AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+AnimalDataCat$GenderIDDesc[which(is.na(AnimalDataCat$GenderIDDesc))]<-"UNKNOWN"
+ggplot(data=AnimalDataCat, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Cat Bites per Gender")+ guides(fill=FALSE)
+
+#cat bites per year
+AnimalDataCat<-AnimalDataCat[!is.na(AnimalDataCat$bite_date),]
+AnimalDataCat$bite_date = format(as.Date(AnimalDataCat$bite_date, format="%Y-%m-%d"),"%Y")
+AnimalDataCat$bite_date = as.Date(AnimalDataCat$bite_date, format('%Y'))
+ggplot(AnimalDataCat, aes(x=bite_date[])) + geom_bar(stat="count")+scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))
+
+#cat bites per month
