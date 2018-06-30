@@ -12,8 +12,8 @@ names(AnimalData)
 AnimalData[AnimalData == ""] <- NA
 apply(is.na(AnimalData), 2, sum)
 #clean wrong dates
-library(anytime)
-AnimalData<-AnimalData[anytime(AnimalData$bite_date) >= anytime(as.factor("1985-05-05 00:00:00")) & anytime(AnimalData$bite_date) <= anytime(as.factor("2018-06-21 00:00:00")),]
+AnimalData$bite_date = as.Date(AnimalData$bite_date, format('%Y-%m-%d'))
+AnimalData<-AnimalData[AnimalData$bite_date > as.Date("1985-05-05") & AnimalData$bite_date < as.Date("2018-06-21 00:00:00"),]
 
 
 #almost all coulums have missing values
@@ -58,4 +58,16 @@ AnimalDataUnknown<-AnimalData[AnimalData$GenderIDDesc=="UNKNOWN",]
 AnimalDataUnknown$BreedIDDesc <-factor(AnimalDataUnknown$BreedIDDesc, levels = unique(as.character(AnimalDataUnknown$BreedIDDesc)))
 ggplot(data = subset(AnimalDataUnknown,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed with Unknown gender")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataUnknown$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
+#create copy of orig data
+AnimalDataDateCleaned<-AnimalData
+#remove rows with NA
+AnimalDataDateCleaned<-AnimalDataDateCleaned[!is.na(AnimalData$bite_date),]
+
+library(scales)
+#extract year
+AnimalDataDateCleaned$bite_date = format(as.Date(AnimalDataDateCleaned$bite_date, format="%Y-%m-%d"),"%Y")
+#transform back to date format
+AnimalDataDateCleaned$bite_date = as.Date(AnimalDataDateCleaned$bite_date, format('%Y'))
+#plot year vs bites #TODO colours not working here somehow
+ggplot(AnimalDataDateCleaned, aes(x=bite_date[], fill =bite_date)) + geom_bar(stat="count") +scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))+guides(fill=FALSE)
 
