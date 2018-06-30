@@ -94,4 +94,11 @@ AnimalDataBody<-AnimalData[AnimalData$WhereBittenIDDesc=="BODY",]
 AnimalDataBody$BreedIDDesc <-factor(AnimalDataBody$BreedIDDesc, levels = unique(as.character(AnimalDataBody$BreedIDDesc)))
 ggplot(data = subset(AnimalDataBody,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed in the Body")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataBody$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
+#pitbull bites per year
+AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
+AnimalDataPitBull<-AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
+AnimalDataPitBull<-AnimalDataPitBull[!is.na(AnimalDataPitBull$bite_date),]
+AnimalDataPitBull$bite_date = format(as.Date(AnimalDataPitBull$bite_date, format="%Y-%m-%d"),"%Y")
+AnimalDataPitBull$bite_date = as.Date(AnimalDataPitBull$bite_date, format('%Y'))
+ggplot(AnimalDataPitBull, aes(x=bite_date[])) + geom_bar(stat="count")+scale_x_date(labels = date_format("%y"), breaks = date_breaks("year"))
 
