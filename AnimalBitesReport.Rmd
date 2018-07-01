@@ -60,5 +60,65 @@ kable(perceptionTable, caption = "On a typical scale, the Delta E value will ran
 
 To analyse the given data ...
 
+```{r animalBitesPerSpecies}
+```
 
+```{r pieChartForBites}
+```
 
+```{r dogBitesPerBreed}
+```
+
+```{r genderOfDogsInvolvedInBitesBarplot}
+```
+
+```{r genderOfDogsInvolvedInBites}
+```
+
+```{r breedOfMaleDogsInvolvedInBites}
+```
+
+```{r breedOfFemaleDogsInvolvedInBites}
+```
+
+```{r breedOfUnknownDogsInvolvedInBites}
+```
+
+```{r dogBitesPerMonth}
+```
+
+```{r dogBitesPerDay}
+```
+
+```{r dogBitesPerBreedInTheHead}
+```
+
+```{r dogBitesPerBreedInTheBody}
+```
+
+```{r pitbullBitesPerYear}
+```
+
+```{r catBitesPerGenderAsWafflechart}
+```
+
+```{r catBitesPerYear}
+```
+
+```{r catBitesPerMonth}
+```
+
+```{r catBitesPerDay}
+```
+
+```{r otherSpeciesExcludingDogsAndCats}
+```
+
+```{r otherAnimalBitesPerYear}
+```
+
+```{r otherAnimalBitesPerMonth}
+```
+
+```{r otherAnimalBitesPerDay}
+```
