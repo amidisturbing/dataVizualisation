@@ -30,7 +30,9 @@ The repository can be found on [Github](https://github.com/amidisturbing/datavis
 
 ## The data
 
+### The columns
 
+*head_sent_date* has the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.
 
 Formulars are written like this:
 
