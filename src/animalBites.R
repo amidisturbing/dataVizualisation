@@ -128,6 +128,7 @@ ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = AnimalDataPitBull$WhereBitte
 #ggplot(data=AnimalDataCat, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Cat Bites per Gender")+guides(fill=FALSE)
 
 ## @knitr catBitesPerGenderAsWafflechart
+AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
 var <- AnimalDataCat$GenderIDDesc  # the categorical data 
 nrows <- 10
 df <- expand.grid(y = 1:nrows, x = 1:nrows)
