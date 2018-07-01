@@ -122,13 +122,12 @@ AnimalDataPitBull$bite_date = format(as.Date(AnimalDataPitBull$bite_date, format
 ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = AnimalDataPitBull$WhereBittenIDDesc)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Pit Bull Bites per Day")+theme(legend.title=element_blank())
 
 
-#cat bites per gender
-#AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
-#AnimalDataCat$GenderIDDesc[which(is.na(AnimalDataCat$GenderIDDesc))]<-"UNKNOWN"
-#ggplot(data=AnimalDataCat, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Cat Bites per Gender")+guides(fill=FALSE)
 
 ## @knitr catBitesPerGenderAsWafflechart
+#cat bites per gender
 AnimalDataCat<-AnimalData[AnimalData$SpeciesIDDesc=="CAT",]
+AnimalDataCat$GenderIDDesc[which(is.na(AnimalDataCat$GenderIDDesc))]<-"UNKNOWN"
+#ggplot(data=AnimalDataCat, aes(x=GenderIDDesc[], fill =GenderIDDesc))+geom_bar(stat = "count")+xlab("Gender")+ylab("Bites")+ggtitle("Cat Bites per Gender")+guides(fill=FALSE)
 var <- AnimalDataCat$GenderIDDesc  # the categorical data 
 nrows <- 10
 df <- expand.grid(y = 1:nrows, x = 1:nrows)

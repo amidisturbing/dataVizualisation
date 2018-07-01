@@ -16,7 +16,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr) #to set up options and use kable function
-opts_chunk$set(echo = FALSE, cache=FALSE) #(echo = TRUE) would include all code
+opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE) #(echo = TRUE) would include all code
 read_chunk('src/animalBites.R')
 ```
 
