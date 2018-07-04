@@ -20,8 +20,6 @@ opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE) #(echo =
 read_chunk('src/animalBites.R')
 ```
 
-```{r part1}
-```
 # Introduction
 
 In this excersise we examine animal bites registered in the U.S from
@@ -30,33 +28,24 @@ The repository can be found on [Github](https://github.com/amidisturbing/datavis
 
 ## The data
 
-### The columns
-
-*head_sent_date* has the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.# Introduction
-
-In this exercise, we examine animal bites registered in the U.S from
-
-The repository can be found on [Github](https://github.com/amidisturbing/datavis2018).
-
-## The data
-
 **Data source: https://data.louisvilleky.gov/dataset/animal-bites (June 2018)**
 
-The original data source contains 19826 rows and 18 columns.
+```{r part1}
+```
 
-The columns names are "ID", "bite_date", "SpeciesIDDesc", "BreedIDDesc", "GenderIDDesc", "color", "vaccination_yrs", "vaccination_date", "victim_zip", "AdvIssuedYNDesc", "WhereBittenIDDesc", "quarantine_date", "DispositionIDDesc", "head_sent_date", "release_date", "ResultsIDDesc", "FollowupYNDesc", "ResolveCompYesNo".
+The original dataset contains 19826 rows and 18 columns.
 
-The column "FollowupYNDesc" was added by mistake, according to the current Data Manager and Performance Partner of the Louisville Metro Department of Public Health and Wellness, Gerald (Jerry) Kaforski.
+The column *head_sent_date* shows the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.
 
-The column "head_sent_date" has the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.
+According to the current Data Manager and Performance Partner of the Louisville Metro Department of Public Health and Wellness, Gerald (Jerry) Kaforski, the column *FollowupYNDesc* was added by mistake.
 
-Taking a closer look at the column "bite_date", we find some the year1952 until the year 5013.
+Taking a closer look at the column *bite_date*, we find some the year 1952 until the year 5013.
 
-## Preparation
+## Data preparation
 
 The missing values of the dataset were converted to **NA**. 
 
-The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018.
+The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018, what took also care of the impossible values in the dataset.
 
 # Analysis
 
@@ -69,6 +58,11 @@ The plot shows that there were more than 15000 dogs, about 35000 a few bats and 
 
 ```{r fig.cap="", pieChartForBites}
 ```
+
+Since dogs are much more likely to be in contact with humans, this comes as no surprise.
+For our further Analysis, we will take a closer look at the data we have specifically about dog bites.
+
+Visualizing the dog breeds of the animal bite dataset we clearly see, that pit bulls are on the very top of the ranking.
 
 ```{r fig.cap="", dogBitesPerBreed}
 ```
