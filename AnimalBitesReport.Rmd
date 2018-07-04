@@ -91,6 +91,9 @@ https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_81123
 ```{r fig.cap="", breedOfUnknownDogsInvolvedInBites}
 ```
 
+```{r fig.cap="", dogBitesPerYear}
+```
+
 ```{r fig.cap="", dogBitesPerMonth}
 ```
 
@@ -108,7 +111,7 @@ https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_81123
 
 By just looking at the charts it might seem obvious to conclude that Pitbulls are most likely to bite human beings, no matter of the gender of the dog, nor if the victim was bitten in head or body.
 
-Now we will take into the account the earlier mentioned arguments of Steffen Baldwin. According to him the questions 
+Now we will take into the account the earlier mentioned arguments of Steffen Baldwin. According to his article the questions 
 
 A, What is a Pit Bull?
 

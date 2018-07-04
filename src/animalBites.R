@@ -83,13 +83,14 @@ AnimalDataUnknown<-AnimalData[AnimalData$GenderIDDesc=="UNKNOWN",]
 AnimalDataUnknown$BreedIDDesc <-factor(AnimalDataUnknown$BreedIDDesc, levels = unique(as.character(AnimalDataUnknown$BreedIDDesc)))
 ggplot(data = subset(AnimalDataUnknown,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Animalbites per Breed with Unknown gender")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataUnknown$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
+## @knitr dogBitesPerYear
 #create copy of orig data
 AnimalDataOnlyYear<-AnimalData
 #remove rows with NA
 AnimalDataOnlyYear<-AnimalDataOnlyYear[!is.na(AnimalDataOnlyYear$bite_date),]
 #extract year
 AnimalDataOnlyYear$bite_date = format(as.Date(AnimalDataOnlyYear$bite_date, format="%Y-%m-%d"),"%Y")
-ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =AnimalDataOnlyYear$GenderIDDesc)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Dog Bites per Year")+theme(legend.title=element_blank())
+ggplot(AnimalDataOnlyYear, aes(x=bite_date[], fill =AnimalDataOnlyYear$GenderIDDesc)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Dog Bites per Year")+theme(legend.title=element_blank())+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ## @knitr dogBitesPerMonth
 AnimalDataOnlyMonth<-AnimalData
@@ -114,7 +115,7 @@ AnimalDataBody<-AnimalData[AnimalData$WhereBittenIDDesc=="BODY",]
 AnimalDataBody$BreedIDDesc <-factor(AnimalDataBody$BreedIDDesc, levels = unique(as.character(AnimalDataBody$BreedIDDesc)))
 ggplot(data = subset(AnimalDataBody,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Breeds with Body Bites")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataBody$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
-## @knitr pitbullBitesPerYear
+## @knitr pitbullBitesPerDay
 AnimalDataPitBull<-AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
 AnimalDataPitBull$WhereBittenIDDesc[which(is.na(AnimalDataPitBull$WhereBittenIDDesc))]<-"UNKNOWN"
 AnimalDataPitBull<-AnimalDataPitBull[!is.na(AnimalDataPitBull$bite_date),]
