@@ -59,6 +59,7 @@ The plot shows that there were more than 15000 dogs, about 35000 a few bats and 
 ```{r fig.cap="The plot shows that there were more than 15000 dogs, about 35000 a few bats and raccoons and some other animals in the Top 5.", animalBitesPerSpecies}
 ```
 
+
 ```{r fig.cap="", pieChartForBites}
 ```
 
@@ -68,7 +69,8 @@ For our further Analysis, we will take a closer look at the data we have specifi
 
 ## Dog Bites
 
-We are most interessted in the species we have the most information available. To analyse our visualizations we add the opinion of Steffen Baldwin, expressed in his article *The Lies, Damn Lies and Statistics Behind Dog Bites*.
+We are most interessted in the species we have the most information available. To analyse our visualizations we add the opinion of Steffen Baldwin, expressed in his article *The Lies, Damn Lies and Statistics Behind Dog Bites*. The article was published in 2015 under the URL 
+https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_8112394.html.
 
 
 ```{r fig.cap="Visualizing the dog breeds of the animal bite dataset we clearly see, that pit bulls are on the very top of the ranking.", dogBitesPerBreed}
@@ -137,10 +139,11 @@ are answered as follows:
 
 **How are pit bulls identified?:** Visual breed identification, or the process of tilting your head 30 degrees to the right or left and guessing based on a few, basic traits and the inability to automatically identify the dog as something else, is how pit bulls are identified.
 
-Since the most dogs living in American households are mixed Breeds 
+Since the most dogs living in American households are mixed breeds some dogs declared as pit bulls by visual breed identification could also genetically be another breed. 
 
-The article was published in 2015 under the URL 
-https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_8112394.html.
+The rise of pit bulls as a breed being chosen to be a domestic animal in the last years could also be a bias to our data.
+
+
 
 ## Cat Bites
 
