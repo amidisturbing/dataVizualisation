@@ -32,35 +32,36 @@ The repository can be found on [Github](https://github.com/amidisturbing/datavis
 
 ### The columns
 
-*head_sent_date* has the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.
+*head_sent_date* has the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.# Introduction
 
-Formulars are written like this:
+In this exercise, we examine animal bites registered in the U.S from
 
-$$∆E76 = \sqrt{∆L^2 + ∆a^2 + ∆b^2}$$
+The repository can be found on [Github](https://github.com/amidisturbing/datavis2018).
 
+## The data
 
-```{r}
-perceptionTable <- matrix(NA, nrow = 5, ncol = 2, byrow = FALSE)
-colnames(perceptionTable) <- c("ΔE value","Perception")
-deltaE <- c("<= 1.0","1 - 2", "3 - 10", "11 - 49", "100")
-perception <- c("Not perceptible by human eyes.", "Perceptible through close observation.
-", "Perceptible at a glance.
-", "Colors are more similar than opposite
-", "Colors are exact opposite
-")
-for (i in 1:5) {
-  perceptionTable[i,"ΔE value"] <- deltaE[i]
-  perceptionTable[i,"Perception"] <- perception[i]
-}
-kable(perceptionTable, caption = "On a typical scale, the Delta E value will range from 0 to 100.")
-```
+**Data source: https://data.louisvilleky.gov/dataset/animal-bites (June 2018)**
 
+The original data source contains 19826 rows and 18 columns.
 
+The columns names are "ID", "bite_date", "SpeciesIDDesc", "BreedIDDesc", "GenderIDDesc", "color", "vaccination_yrs", "vaccination_date", "victim_zip", "AdvIssuedYNDesc", "WhereBittenIDDesc", "quarantine_date", "DispositionIDDesc", "head_sent_date", "release_date", "ResultsIDDesc", "FollowupYNDesc", "ResolveCompYesNo".
+
+The column "FollowupYNDesc" was added by mistake, according to the current Data Manager and Performance Partner of the Louisville Metro Department of Public Health and Wellness, Gerald (Jerry) Kaforski.
+
+The column "head_sent_date" has the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.
+
+Taking a closer look at the column "bite_date", we find some the year1952 until the year 5013.
+
+## Preparation
+
+The missing values of the dataset were converted to **NA**. 
+
+The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018.
 # Analysis
 
-To analyse the given data ...
+At first we want to visualize the first five Species which are involved in Animal Bites in the given timeperiod.
 
-```{r animalBitesPerSpecies}
+```{r fig.cap="The plot shows that there were more than 15000 dogs, about 35000 a few bats and racoons and some other animals in the Top 5.", animalBitesPerSpecies}
 ```
 
 ```{r pieChartForBites}
