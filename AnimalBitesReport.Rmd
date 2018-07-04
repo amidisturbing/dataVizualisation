@@ -28,7 +28,7 @@ The repository can be found on [Github](https://github.com/amidisturbing/datavis
 
 ## The data
 
-**Data source: https://data.louisvilleky.gov/dataset/animal-bites (June 2018)**
+**Data source: https://data.louisvilleky.gov/dataset/animal-bites** (June 2018)
 
 First we want to get an idea, how our data looks like and of what quality it is.
 
@@ -46,7 +46,7 @@ It also held 2 impossible entries from the year 5013, which might be a typo mean
 
 ## Data preparation
 
-The missing values of the dataset were converted to **NA**. 
+The missing values of the dataset were converted to *NA*. 
 
 The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018, what took also care of the impossible values in the dataset.
 
@@ -144,7 +144,7 @@ https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_81123
 
 ## Cat Bites
 
-```{r fig.cap="", catBitesPerGenderAsWafflechart}
+```{r fig.cap="The gender stayed mostly unrecorded. There is a slightly higher amount of male cats in the records.", catBitesPerGenderAsWafflechart}
 ```
 
 ```{r fig.cap="", catBitesPerYear}
@@ -155,6 +155,10 @@ https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_81123
 
 ```{r fig.cap="", catBitesPerDay}
 ```
+
+
+The results are similar to those about dog bites. The development in IT and Infrastructure could be a reason for the increase in the recorded bites per Year. We can also assume that the rise in the summer months is due to an increase in outdoor activity. 
+There is not much difference in the number of reported bites per day of the month.
 
 
 ## Other Species
