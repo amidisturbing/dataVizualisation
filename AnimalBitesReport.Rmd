@@ -57,69 +57,72 @@ Taking a closer look at the column "bite_date", we find some the year1952 until 
 The missing values of the dataset were converted to **NA**. 
 
 The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018.
+
 # Analysis
 
-At first we want to visualize the first five Species which are involved in Animal Bites in the given timeperiod.
+At first, we want to visualize the first five Species which are involved in Animal Bites in the given time period.
 
-```{r fig.cap="The plot shows that there were more than 15000 dogs, about 35000 a few bats and racoons and some other animals in the Top 5.", animalBitesPerSpecies}
+The plot shows that there were more than 15000 dogs, about 35000 a few bats and raccoons and some other animals in the Top 5.
+
+```{r fig.cap="The plot shows that there were more than 15000 dogs, about 35000 a few bats and raccoons and some other animals in the Top 5.", animalBitesPerSpecies}
 ```
 
-```{r pieChartForBites}
+```{r fig.cap="", pieChartForBites}
 ```
 
-```{r dogBitesPerBreed}
+```{r fig.cap="", dogBitesPerBreed}
 ```
 
-```{r genderOfDogsInvolvedInBitesBarplot}
+```{r fig.cap="", genderOfDogsInvolvedInBitesBarplot}
 ```
 
-```{r genderOfDogsInvolvedInBites}
+```{r fig.cap="", genderOfDogsInvolvedInBites}
 ```
 
-```{r breedOfMaleDogsInvolvedInBites}
+```{r fig.cap="", breedOfMaleDogsInvolvedInBites}
 ```
 
-```{r breedOfFemaleDogsInvolvedInBites}
+```{r fig.cap="", breedOfFemaleDogsInvolvedInBites}
 ```
 
-```{r breedOfUnknownDogsInvolvedInBites}
+```{r fig.cap="", breedOfUnknownDogsInvolvedInBites}
 ```
 
-```{r dogBitesPerMonth}
+```{r fig.cap="", dogBitesPerMonth}
 ```
 
-```{r dogBitesPerDay}
+```{r fig.cap="", dogBitesPerDay}
 ```
 
-```{r dogBitesPerBreedInTheHead}
+```{r fig.cap="", dogBitesPerBreedInTheHead}
 ```
 
-```{r dogBitesPerBreedInTheBody}
+```{r fig.cap="", dogBitesPerBreedInTheBody}
 ```
 
-```{r pitbullBitesPerYear}
+```{r fig.cap="", pitbullBitesPerYear}
 ```
 
-```{r catBitesPerGenderAsWafflechart}
+```{r fig.cap="", catBitesPerGenderAsWafflechart}
 ```
 
-```{r catBitesPerYear}
+```{r fig.cap="", catBitesPerYear}
 ```
 
-```{r catBitesPerMonth}
+```{r fig.cap="", catBitesPerMonth}
 ```
 
-```{r catBitesPerDay}
+```{r fig.cap="", catBitesPerDay}
 ```
 
-```{r otherSpeciesExcludingDogsAndCats}
+```{r fig.cap="", otherSpeciesExcludingDogsAndCats}
 ```
 
-```{r otherAnimalBitesPerYear}
+```{r fig.cap="", otherAnimalBitesPerYear}
 ```
 
-```{r otherAnimalBitesPerMonth}
+```{r fig.cap="", otherAnimalBitesPerMonth}
 ```
 
-```{r otherAnimalBitesPerDay}
+```{r fig.cap="", otherAnimalBitesPerDay}
 ```
