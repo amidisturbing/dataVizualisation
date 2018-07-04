@@ -91,14 +91,20 @@ https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_81123
 ```{r fig.cap="", breedOfUnknownDogsInvolvedInBites}
 ```
 
-```{r fig.cap="", dogBitesPerYear}
+```{r fig.cap="The most reports in our dataset are from the period  2010 until 2017. Here we encounter around 2000 entries per year.", dogBitesPerYear}
 ```
 
-```{r fig.cap="", dogBitesPerMonth}
+The fast growth of the archived reports could be due to the awareness of the importance of data as well as the fast development in the field of IT.
+
+```{r fig.cap="There are more dog bites reported in the warm months.", dogBitesPerMonth}
 ```
 
-```{r fig.cap="", dogBitesPerDay}
+Since it is much more likely that dogs get in contact with strangers during the warm sessions, this adaption seems to be quite reasonable. The chances of getting bitten by a dog are much higher if there are more unknown people around the animal. Also, the more dogs you meet, the higher your chances are to get bitten. 
+
+```{r fig.cap="The day of the month has no influence on the number of reported dog bites.", dogBitesPerDay}
 ```
+
+The distribution of the gender of the recorded dogs that attacked someone stays equal during the investigated time intervals.
 
 ```{r fig.cap="", dogBitesPerBreedInTheHead}
 ```
