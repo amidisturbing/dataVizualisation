@@ -30,6 +30,8 @@ The repository can be found on [Github](https://github.com/amidisturbing/datavis
 
 **Data source: https://data.louisvilleky.gov/dataset/animal-bites (June 2018)**
 
+First we want to get an idea, how our data looks like and of what quality it is.
+
 ```{r part1}
 ```
 
@@ -39,7 +41,8 @@ The column *head_sent_date* shows the most missing values since not every head o
 
 According to the current Data Manager and Performance Partner of the Louisville Metro Department of Public Health and Wellness, Gerald (Jerry) Kaforski, the column *FollowupYNDesc* was added by mistake.
 
-Taking a closer look at the column *bite_date*, we find some the year 1952 until the year 5013.
+Examining the data by hand, it stood out that the column "bite_date" has some very old entries from the year 1952 were other animal breeds were likely to live in households then it may be the case today.  
+It also held 2 impossible entries from the year 5013, which might be a typo meaning  2013.
 
 ## Data preparation
 
@@ -62,10 +65,16 @@ The plot shows that there were more than 15000 dogs, about 35000 a few bats and 
 Since dogs are much more likely to be in contact with humans, this comes as no surprise.
 For our further Analysis, we will take a closer look at the data we have specifically about dog bites.
 
-Visualizing the dog breeds of the animal bite dataset we clearly see, that pit bulls are on the very top of the ranking.
 
-```{r fig.cap="", dogBitesPerBreed}
+##Dog Bites
+
+We are most interessted in the Species we have the most information available. To analyse our visualizations we add the opinion of Steffen Baldwin, expressed in his article *The Lies, Damn Lies and Statistics Behind Dog Bites*. It was published in 2015 at the URL 
+https://www.huffingtonpost.com/steffen-baldwin/the-lies-damn-lies-and-st_b_8112394.html.
+
+
+```{r fig.cap="Visualizing the dog breeds of the animal bite dataset we clearly see, that pit bulls are on the very top of the ranking.", dogBitesPerBreed}
 ```
+
 
 ```{r fig.cap="", genderOfDogsInvolvedInBitesBarplot}
 ```
@@ -94,8 +103,29 @@ Visualizing the dog breeds of the animal bite dataset we clearly see, that pit b
 ```{r fig.cap="", dogBitesPerBreedInTheBody}
 ```
 
-```{r fig.cap="", pitbullBitesPerYear}
+```{r fig.cap="", pitbullBitesPerDay}
 ```
+
+By just looking at the charts it might seem obvious to conclude that Pitbulls are most likely to bite human beings, no matter of the gender of the dog, nor if the victim was bitten in head or body.
+
+Now we will take into the account the earlier mentioned arguments of Steffen Baldwin. According to him the questions 
+
+A, What is a Pit Bull?
+
+and
+
+B, How are pit bulls identified?
+
+are answered as follows:
+
+**What is a Pit Bull?:** It is commonly accepted that “pit bull” is not a breed but a loosely defined and general category. Definition of this category varies depending upon the source. Any blocky headed dog, or any mix of breeds that is between 35 and 100 pounds and upwards of 30 individual dog breeds may currently fall in this broad category through the use of visual breed identification. 
+
+**How are pit bulls identified?:** Visual breed identification, or the process of tilting your head 30 degrees to the right or left and guessing based on a few, basic traits and the inability to automatically identify the dog as something else, is how pit bulls are identified.
+
+Since the most dogs living in American households are mixed Breeds 
+
+
+## Cat Bites
 
 ```{r fig.cap="", catBitesPerGenderAsWafflechart}
 ```
