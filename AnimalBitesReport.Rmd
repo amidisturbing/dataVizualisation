@@ -54,9 +54,7 @@ The values in "bite_date" were limited to the period between the 5th of May 1985
 
 At first, we want to visualize the first five Species which are involved in Animal Bites in the given time period.
 
-The plot shows that there were more than 15000 dogs, about 3500 cats, a few bats, raccoons and some other animals in the Top 5.
-
-```{r fig.cap="The plot shows that there were more than 15000 dogs, about 35000 a few bats and raccoons and some other animals in the Top 5.", animalBitesPerSpecies}
+```{r fig.cap="The plot shows that there were more than 15000 dogs, about 3500 cats, a few bats, raccoons and some other animals in the Top 5.", animalBitesPerSpecies}
 ```
 
 
