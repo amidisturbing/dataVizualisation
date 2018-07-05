@@ -1,5 +1,5 @@
-setwd("/Users/rafa/Documents/SS2018/DataVis/dataVizualisation")
-
+#setwd("/Users/rafa/Documents/SS2018/DataVis/dataVizualisation")
+setwd("~/Desktop/project2/")
 ## @knitr part1
 
 #data source: https://data.louisvilleky.gov/dataset/animal-bites
@@ -115,12 +115,12 @@ AnimalDataBody<-AnimalData[AnimalData$WhereBittenIDDesc=="BODY",]
 AnimalDataBody$BreedIDDesc <-factor(AnimalDataBody$BreedIDDesc, levels = unique(as.character(AnimalDataBody$BreedIDDesc)))
 ggplot(data = subset(AnimalDataBody,!is.na(BreedIDDesc)),aes(x = BreedIDDesc[], fill =BreedIDDesc))+geom_bar(stat = "count")+xlab("Breed") + ylab("Bites")+ggtitle("Top 30 Breeds with Body Bites")+ theme(axis.text.x = element_text(angle = 90, hjust = 1))+xlim(names(sort(table(AnimalDataBody$BreedIDDesc), decreasing = TRUE)[1:30]))+ guides(fill=FALSE)
 
-## @knitr pitbullBitesPerDay
+## @knitr pitbullBitesPerYear
 AnimalDataPitBull<-AnimalData[AnimalData$BreedIDDesc=="PIT BULL",]
 AnimalDataPitBull$WhereBittenIDDesc[which(is.na(AnimalDataPitBull$WhereBittenIDDesc))]<-"UNKNOWN"
 AnimalDataPitBull<-AnimalDataPitBull[!is.na(AnimalDataPitBull$bite_date),]
 AnimalDataPitBull$bite_date = format(as.Date(AnimalDataPitBull$bite_date, format="%Y-%m-%d"),"%Y")
-ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = AnimalDataPitBull$WhereBittenIDDesc)) + geom_bar(stat="count")+xlab("Day of the Month")+ylab("Number of Bites")+ggtitle("Pit Bull Bites per Day")+theme(legend.title=element_blank())
+ggplot(AnimalDataPitBull, aes(x=bite_date[], fill = AnimalDataPitBull$WhereBittenIDDesc)) + geom_bar(stat="count")+xlab("Year")+ylab("Number of Bites")+ggtitle("Pit Bull Bites per Year")+theme(legend.title=element_blank())
 
 
 

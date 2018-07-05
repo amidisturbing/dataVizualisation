@@ -30,31 +30,31 @@ The repository can be found on [Github](https://github.com/amidisturbing/datavis
 
 **Data source: https://data.louisvilleky.gov/dataset/animal-bites** (June 2018)
 
-First we want to get an idea, how our data looks like and of what quality it is.
+First we analyse our data and check its quality.
 
 ```{r part1}
 ```
 
 The original dataset contains 19826 rows and 18 columns.
-
-The column *head_sent_date* shows the most missing values since not every head of the animal which was registered is cut off and send to the department of health care.
+There are alot of missing values in most of the columns.
+The column *head_sent_date* shows the most missing values. This is because not every head of the animal which was registered is cut off and send to the department of health care.
 
 According to the current Data Manager and Performance Partner of the Louisville Metro Department of Public Health and Wellness, Gerald (Jerry) Kaforski, the column *FollowupYNDesc* was added by mistake.
 
-Examining the data by hand, it stood out that the column "bite_date" has some very old entries from the year 1952 were other animal breeds were likely to live in households then it may be the case today.  
+Examining the data by hand, it appears that the column "bite_date" has some very old entries from the year 1952 where other animal breeds were likely to live in households then it may be the case today. The older the Date the less bites have been documented.
 It also held 2 impossible entries from the year 5013, which might be a typo meaning  2013.
 
 ## Data preparation
 
 The missing values of the dataset were converted to *NA*. 
 
-The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018, what took also care of the impossible values in the dataset.
+The values in "bite_date" were limited to the period between the 5th of May 1985 and the 21st of June 2018, to exclude the impossible dates.
 
 # Visualization
 
 At first, we want to visualize the first five Species which are involved in Animal Bites in the given time period.
 
-The plot shows that there were more than 15000 dogs, about 35000 a few bats and raccoons and some other animals in the Top 5.
+The plot shows that there were more than 15000 dogs, about 3500 cats, a few bats, raccoons and some other animals in the Top 5.
 
 ```{r fig.cap="The plot shows that there were more than 15000 dogs, about 35000 a few bats and raccoons and some other animals in the Top 5.", animalBitesPerSpecies}
 ```
@@ -69,9 +69,9 @@ For our further Analysis, we will take a closer look at the data we have specifi
 
 ## Dog Bites
 
-We are most interessted in the species we have the most information available. 
+We are most interested in the species that has the most available data. 
 
-```{r fig.cap="Visualizing the dog breeds of the animal bite dataset we clearly see, that pit bulls are on the very top of the ranking.", dogBitesPerBreed}
+```{r fig.cap="Visualizing the dog breeds of the animal bite dataset we clearly see, that pit bulls are on the very top of the ranking. It is important to keep in mind that serious bites are more likely to be reported.", dogBitesPerBreed}
 ```
 
 
@@ -87,16 +87,16 @@ We are most interessted in the species we have the most information available.
 ```{r fig.cap="", breedOfFemaleDogsInvolvedInBites}
 ```
 
-```{r fig.cap="", breedOfUnknownDogsInvolvedInBites}
+```{r fig.cap="It seems female dogs bite as often as male dogs. Differences in the lower rankings can be neglected. Unknown bites could shift the result ofcourse.", breedOfUnknownDogsInvolvedInBites}
 ```
 
 ```{r fig.cap="", dogBitesPerBreedInTheHead}
 ```
 
-```{r fig.cap="", dogBitesPerBreedInTheBody}
+```{r fig.cap="Dogs bite more often in the body because its easier to access.", dogBitesPerBreedInTheBody}
 ```
 
-```{r fig.cap="", pitbullBitesPerDay}
+```{r fig.cap="", pitbullBitesPerYear}
 ```
 
 ```{r fig.cap="The most records in our dataset are from the period  2010 until 2017. Here we encounter around 2000 entries per year.", dogBitesPerYear}
@@ -109,7 +109,7 @@ The fast growth of the archived reports could be due to the awareness of the imp
 ```{r fig.cap="There are more dog bites reported in the warm months.", dogBitesPerMonth}
 ```
 
-Since it is much more likely that dogs get in contact with strangers during the warm sessions, this adaption seems to be quite reasonable. The chances of getting bitten by a dog are much higher if there are more unknown people around the animal. Also, the more dogs you meet, the higher your chances are to get bitten. 
+Since it is much more likely that dogs get in contact with strangers during the warmer months, the statistic seems to be quite reasonable. The chances of getting bitten by a dog are much higher if there are more unknown people around the animal. Also, the more dogs you meet, the higher your chances are to get bitten. 
 
 
 ```{r fig.cap="The day of the month has no influence on the number of reported dog bites.", dogBitesPerDay}
